@@ -1,0 +1,42 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+pr:
+- main
+
+pool: Kanch-selfhosted
+
+steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+- task: TerraformTaskV4@4
+  displayName: 'Terraform-init'
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_creation'
+    backendServiceArm: 'kanch'
+    backendAzureRmResourceGroupName: 'Kanch-rg'
+    backendAzureRmStorageAccountName: 'kanchstorageacc12'
+    backendAzureRmContainerName: 'tfstate12'
+    backendAzureRmKey: 'terraform.tfstate'
+- task: TerraformTaskV4@4
+  displayName: 'Terraform-plan'
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_creation'
+    environmentServiceNameAzureRM: 'kanch'
+
+- task: TerraformTaskV4@4
+  displayName: 'Terraform-apply'
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Infra_creation'
+    environmentServiceNameAzureRM: 'kanch'
