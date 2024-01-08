@@ -61,8 +61,11 @@ jobs:
     env:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_TENANT_ID: ${{secrets.AZURE_TENANT_ID }}
+      MVP_SUBSCRIPTION: ${{ secrets.MVP_SUBSCRIPTION }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_STORAGE_NAME: ${{ secrets.AZURE_STORAGE_NAME }}
+      AZURE_CONTAINER_NAME: ${{ secrets.AZURE_CONTAINER_NAME }}
+      VALUE_KEY: ${{ secrets.VALUE_KEY }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
