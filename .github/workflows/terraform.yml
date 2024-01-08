@@ -83,6 +83,11 @@ jobs:
         AZURE_STORAGE_NAME: ${{ secrets.AZURE_STORAGE_NAME }}
         AZURE_CONTAINER_NAME: ${{ secrets.AZURE_CONTAINER_NAME }}
         VALUE_KEY: ${{ secrets.VALUE_KEY }}
+        enable-AzPSSession: false
+        environment: azurecloud
+        allow-no-subscriptions: false
+        audience: api://AzureADTokenExchange
+        auth-type: SERVICE_PRINCIPAL
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
