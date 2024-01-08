@@ -103,7 +103,7 @@ jobs:
     - name: Terraform Plan
       uses: hashicorp/setup-terraform@v1
       with:
-        tf_actions_working_dir: "./terraform"
+        tf_actions_working_dir: "./Infra_creation"
         tf_actions_subcommand: "plan"
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
@@ -112,6 +112,6 @@ jobs:
       id: apply
       uses: hashicorp/setup-terraform@v1
       with:
-        tf_actions_working_dir: "./terraform"
+        tf_actions_working_dir: "./Infra_creation"
         tf_actions_subcommand: "apply -auto-approve"
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'   #-input=false
