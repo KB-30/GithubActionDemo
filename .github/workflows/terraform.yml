@@ -82,14 +82,26 @@ jobs:
       uses: actions/checkout@v3
       with:
         token: ${{secrets.GITHUB_TOKEN}}
-         
+
+    - name: List Files in Terraform Directory
+      run: |
+        ls -R ./Infra_creation
+ 
+    - name: Print Current Working Directory
+      run: |
+        pwd
+    - name: Debug Secrets
+      run: |
+        echo "Storage Name: ${{ secrets.STORAGE_NAME }}"
+        echo "Container Name: ${{ secrets.CONTAINER_NAME }}"
+        echo "Key: ${{ secrets.VALUE_KEY }}"
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_wrapper: false
-        cli_config_credentials_token: ${{ secrets.AZURE_CREDENTIALS }}
+    #- name: Setup Terraform
+      #uses: hashicorp/setup-terraform@v1
+      #with:
+        #terraform_wrapper: false
+        #cli_config_credentials_token: ${{ secrets.AZURE_CREDENTIALS }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
