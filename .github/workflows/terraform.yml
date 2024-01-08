@@ -83,6 +83,15 @@ jobs:
       with:
         token: ${{secrets.GITHUB_TOKEN}}
 
+    - name: Deploy state bucket
+      run: |
+          set -a 
+          source .env.backend
+          az login --service-principal \
+            -u ${{ secrets.ARM_CLIENT_ID }} \
+            -p ${{ secrets.ARM_CLIENT_SECRET }} \
+            --tenant ${{ secrets.ARM_TENANT_ID }}
+
     - name: List Files in Terraform Directory
       run: |
         ls -R ./Infra_creation
