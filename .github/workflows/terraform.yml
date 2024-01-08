@@ -132,14 +132,14 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
-        tf_actions_working_dir: "./Infra_creation"
+        tf_actions_working_dir: "./Infra_creation/Kmain.tf"
         tf_actions_subcommand: 'fmt'
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
-        tf_actions_working_dir: "./Infra_creation"
+        tf_actions_working_dir: "./Infra_creation/Kmain.tf"
         tf_actions_subcommand: 'init'
 
     # Checks that all Terraform configuration files adhere to a canonical format
@@ -147,7 +147,7 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
-        tf_actions_working_dir: "./Infra_creation"
+        tf_actions_working_dir: "./Infra_creation/Kmain.tf"
         tf_actions_subcommand: 'validate'
 
     # Generates an execution plan for Terraform
@@ -155,7 +155,7 @@ jobs:
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
-        tf_actions_working_dir: "./Infra_creation"
+        tf_actions_working_dir: "./Infra_creation/Kmain.tf"
         tf_actions_subcommand: 'plan'
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
