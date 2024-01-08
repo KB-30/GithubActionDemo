@@ -93,7 +93,11 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init
+      uses: hashicorp/setup-terraform@v1
+      with:
+        tf_actions_version: 0.14.8
+        tf_actions_working_dir: "./GithubActionDemo/Infra_creation"
+        tf_actions_subcommand: "init"
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
@@ -103,7 +107,8 @@ jobs:
     - name: Terraform Plan
       uses: hashicorp/setup-terraform@v1
       with:
-        tf_actions_working_dir: "./Infra_creation"
+        tf_actions_version: 0.14.8
+        tf_actions_working_dir: "./GithubActionDemo/Infra_creation"
         tf_actions_subcommand: "plan"
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
@@ -112,6 +117,7 @@ jobs:
       id: apply
       uses: hashicorp/setup-terraform@v1
       with:
-        tf_actions_working_dir: "./Infra_creation"
-        tf_actions_subcommand: "apply -auto-approve"
+        tf_actions_version: 0.14.8
+        tf_actions_working_dir: "./GithubActionDemo/Infra_creation"
+        tf_actions_subcommand: "apply"
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'   #-input=false
