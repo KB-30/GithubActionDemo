@@ -96,7 +96,7 @@ jobs:
  
     - name: Terraform Format
       run: |
-        terraform fmt -check ./Infra_creation
+        terraform fmt -check ./terraform/Infra_creation
  
     - name: Terraform Init
       uses: hashicorp//terraform-github-actions@master
