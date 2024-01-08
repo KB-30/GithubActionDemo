@@ -95,6 +95,13 @@ jobs:
           azcliversion: latest
           inlineScript: |
             az account show
+
+    - name: Azure PowerShell script
+      uses: azure/powershell@v1
+      with:
+          azPSVersion: "latest"
+          inlineScript: |
+            Get-AzContext
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
