@@ -93,7 +93,7 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp//terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
         tf_actions_working_dir: "./GithubActionDemo/Infra_creation"
@@ -105,7 +105,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp//terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
         tf_actions_working_dir: "./GithubActionDemo/Infra_creation"
@@ -115,7 +115,7 @@ jobs:
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: 'Terraform Apply'
       id: apply
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp//terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
         tf_actions_working_dir: "./GithubActionDemo/Infra_creation"
