@@ -92,36 +92,26 @@ jobs:
         cli_config_credentials_token: ${{ secrets.AZURE_CREDENTIALS }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: 'Terraform Init'
-      id: init
-      run:
-        cd Subscriptions/Shared Services_Harsh
-        terraform init
+    - name: Terraform Init
+      run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
 
     # Generates an execution plan for Terraform
-    - name: 'Terraform Plan'
-      id: plan
-      #uses: hashicorp/setup-terraform@v1
-      #with:
-        #tf_actions_working_dir: "./terraform"
-        #tf_actions_subcommand: "plan"
-      run:
-        cd Subscription/Shared Services_Harsh
-        terraform plan
+    - name: Terraform Plan
+      uses: hashicorp/setup-terraform@v1
+      with:
+        tf_actions_working_dir: "./terraform"
+        tf_actions_subcommand: "plan"
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: 'Terraform Apply'
       id: apply
-      #uses: hashicorp/setup-terraform@v1
-      #with:
-        #tf_actions_working_dir: "./terraform"
-        #tf_actions_subcommand: "apply -auto-approve"
+      uses: hashicorp/setup-terraform@v1
+      with:
+        tf_actions_working_dir: "./terraform"
+        tf_actions_subcommand: "apply -auto-approve"
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'   #-input=false
-      run:
-        cd Subscription/Shared Services_Harsh
-        terraform apply
