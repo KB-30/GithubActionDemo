@@ -73,24 +73,21 @@ jobs:
         shell: bash
 
     steps:
-    #- name: Login to Azure
-      #uses: azure/login@v1
-      #with:
-        #creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        MVP_SUBSCRIPTION: ${{ secrets.MVP_SUBSCRIPTION }}
+        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        AZURE_STORAGE_NAME: ${{ secrets.AZURE_STORAGE_NAME }}
+        AZURE_CONTAINER_NAME: ${{ secrets.AZURE_CONTAINER_NAME }}
+        VALUE_KEY: ${{ secrets.VALUE_KEY }}
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       with:
         token: ${{secrets.GITHUB_TOKEN}}
-
-    - name: Deploy state bucket
-      run: |
-          set -a 
-          source .env.backend
-          az login --service-principal \
-            -u ${{ secrets.ARM_CLIENT_ID }} \
-            -p ${{ secrets.ARM_CLIENT_SECRET }} \
-            --tenant ${{ secrets.ARM_TENANT_ID }}
 
     - name: List Files in Terraform Directory
       run: |
@@ -122,7 +119,8 @@ jobs:
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
-      run: terraform fmt -check
+      run: |
+        terraform fmt -check ./Infra_creation
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
