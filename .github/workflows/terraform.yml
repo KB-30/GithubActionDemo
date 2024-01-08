@@ -78,7 +78,7 @@ jobs:
  
     - name: List Files in Terraform Directory
       run: |
-        ls -R ./terraform
+        ls -R ./Infra_creation
  
     - name: Print Current Working Directory
       run: |
